@@ -20,23 +20,33 @@ background: linear-gradient(to bottom, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 1
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e86ff', endColorstr='#ad005c', GradientType=0 );
 ">
 
-
-    <div class="container-fluid " style="max-width:600px; height:100%; display:table;width:100%; position:relative;top:-30px;">
-        <div style="display:table-cell;vertical-align:middle">
-            <div class="img text-center">
-                <img src="/static/news_icon.png" class="img-fluid" style="max-width:65%;">
-                <h1 class="h3 mb-3 font-weight-normal text-white" style="margin-top: 20px;">News Verificator</h1>
-            </div>
-            <div class="text-center" style="margin-top:50px">
-            <form method="post" class="form-signin rounded login" style="">
-                {% csrf_token %}
-                <div style="margin:60px"></div>
-                <input id="id_username" name="username" autofocus required type="text" class="form-control bg-light" placeholder="Email Address" style="margin-bottom:10px">
-                <input id="id_password" name="password" type="password" required class="form-control bg-light" placeholder="Password" style="">
-                <button type="submit" class="btn btn-lg btn-secondary" style="margin-top:20px;">Log In</button>
-            </form>
+    <div class="container-fluid " style="max-width:900px; height:100%; display:table;width:100%; position:relative;top:30px;">
+        <div class="card" style="opacity:0.5">
+            <img class="card-img" src="/static/news_icon.png" style="margin:30px; max-width:200px" alt="Card image cap">
+            <div class="card-img-overlay">
+                        <div class="h2 text-center text-dark" style="margin-top:75px; margin-left:230px; margin-right=30px">Please select news providers you like</div>
             </div>
         </div>
+
+        <div class="container" style="margin-top:40px; padding-bottom:80px">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="card text-center">
+                <div class="card-header">Select multiple providers</div>
+                <div class="card-body">
+                    <select multiple class="fom-control" id="providers_form" style="width:100%">
+                    {% for provider in providers %}
+                    <option value="{{provider.name}}">{{provider.name}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="submit" id="providers" class="btn-lg btn-secondary">Next ></button>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 </html>
