@@ -36,14 +36,7 @@ def extract_topn_from_vector(feature_names, sorted_items, topn=10):
     
     return results
 
-
-def find_keywords(doc):
-    # loading trained Vectorizer
-    cv = CountVectorizer(decode_error="replace",vocabulary=pickle.load(open("feature.pkl", "rb")))
-
-    # loading trained Transformer
-    tfidf_transformer = pickle.load(open("tfidf1.pkl", 'rb'))
-    
+def find_keywords(doc, cv, tfidf_transformer):
     tf_idf_vector = tfidf_transformer.transform(cv.transform([doc]))
 
     # sort candidates for keywords of tf-idf score
@@ -56,3 +49,18 @@ def find_keywords(doc):
 
     # we can return whole dictionairy as well, with matching score
     return list(keywords.keys()) 
+
+
+def find_english_keywords(doc):
+    # loading trained Vectorizer
+    cv = CountVectorizer(decode_error="replace",vocabulary=pickle.load(open("feature.pkl", "rb")))
+    # loading trained Transformer
+    tfidf_transformer = pickle.load(open("tfidf1.pkl", 'rb'))
+    return find_keywords(doc, cv, tfidf_transformer)
+
+def find_polish_keywords(doc):
+    # loading trained Vectorizer
+    cv = CountVectorizer(decode_error="replace",vocabulary=pickle.load(open("feature_pol.pkl", "rb")))
+    # loading trained Transformer
+    tfidf_transformer = pickle.load(open("tfidf1_pol.pkl", 'rb'))
+    return find_keywords(doc, cv, tfidf_transformer)

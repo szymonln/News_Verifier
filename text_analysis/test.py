@@ -1,6 +1,6 @@
-from analyzer import find_keywords
+from analyzer import find_polish_keywords, find_english_keywords 
 
-# test case
+# test cases
 
 doc1 = '''
     Researchers have come up with a method for creating realistic-looking — but fake — 
@@ -16,4 +16,19 @@ doc1 = '''
     of a person to come up with a convincing "talking head"-style video of them. 
 '''
 
-print(find_keywords(doc1))
+doc2 = '''
+    Gdyby szukać analogii w świecie przyrody, to hakerów bez problemu porównać 
+    można by było do… mrówek. Potrafią przecisnąć się nawet przez najmniejszą 
+    możliwą szczelinę. Gdy tylko dostępna jest okazja, z pewnością ją wykorzystają. 
+    Takimi szczelinami, w naszych komputerach są właśnie luki w oprogramowaniach, 
+    które otwierają drogę do danych i informacji przechowywanych na dyskach.
+    Czym właściwie jest luka? To swego rodzaju „furtka” dla hakerów, umożliwiająca 
+    zainfekowanie komputera złośliwym oprogramowaniem. Mówi się o niej, jako o błędzie 
+    w kodzie w zabezpieczenia aplikacji. Chociaż definicji jest wiele, wszystkie 
+    spójnie wyjaśniają, że luka umożliwia hakerowi wykonywanie czynności na naszym 
+    komputerze, uzyskuje on zatem dostęp do danych, podszywając się pod inną jednostkę/program.
+'''
+
+print(find_english_keywords(doc1))
+
+print(find_polish_keywords(doc2))
