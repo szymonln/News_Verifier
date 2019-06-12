@@ -17,7 +17,7 @@
             width:100%;
             height:80px;
             background:white;
-            position-relative;
+            position: relative;
             left:2px
         }
         input[type='checkbox']:checked{
@@ -26,7 +26,7 @@
         }
         input[type='checkbox']:checked + label{
             content: '✔';
-            text-align:left
+            text-align:left;
             background: #485078;
 
 
@@ -52,36 +52,30 @@
     <div class="container-fluid justify-content-center" style="height:80%; max-width:80%; display:table; position:relative;top:30px; padding-bottom:30px">
 
         <div class="grid">
-            <div class="row justify-content-center" style="margin-top:20px">
 
-                <form class="form-inline justify-content-center" method="post">
+                <form method="post">
                     {% csrf_token %}
-                    {% for provider in providers %}
-                        <div class="card mb-3" style="margin:15px; width:15rem; border:0px solid white; -webkit-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
-                                                        -moz-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
-                                                        box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75)">
-<!--                            <div class="card-header">-->
-<!--                                <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px;" class="bg-white rounded-lg text-muted">-->
-<!--                                    <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider.name}}-->
-<!--                                </h7>-->
-<!--                            </div>-->
-                            <div class="">
-                                <div class="form-inline form-check">
-                                  <label class="form-check-label" for="{{provider.name}}">
-                                      <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px;" class="bg-white rounded-lg text-muted">
-                                        <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider.name}}
-                                        </h7>
-                                  </label>
-                                    <input class="form-check-input" type="checkbox" value="" name="{{provider.base_url}}" id="{{provider.name}}">
+                    <div class="form-group form-inline justify-content-center">
+                        {% for provider in providers %}
+                            <div class="card mb-3" style="margin:15px; width:15rem; border:0px solid white; -webkit-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
+                                                            -moz-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
+                                                            box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75)">
+                                <div class="">
+                                    <div class="form-inline form-check">
+                                    <label class="form-check-label" for="{{provider.name}}">
+                                        <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px;" class="bg-white rounded-lg text-muted">
+                                            <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider.name}}
+                                            </h7>
+                                    </label>
+                                        <input class="form-check-input" type="checkbox" value="" name="{{provider.base_url}}" id="{{provider.name}}">
 
+                                    </div>
                                 </div>
+
                             </div>
-
-                        </div>
-
-                {% endfor %}
-                <div class="row">
-                    <h3>
+                    {% endfor %}
+                    </div>
+                <div class="form-group">
                     <button class="btn btn-lg btn-primary rounded-lg text-white" style="position:absolute; right:100px; padding:10px; background-color:#485078; border:0px solid white" type="submit" value="">
                         Browse news<i style="margin-left:10px;" class="fas fa-angle-double-right"></i></button></h3>
                 </div>

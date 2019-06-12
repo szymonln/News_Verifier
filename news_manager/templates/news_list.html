@@ -16,9 +16,17 @@
         $(".provider").click(function(){
             cards = document.getElementsByClassName("card")
             list = Array.prototype.slice.call(cards)
-            console.log("CLICK")
 
             news_badge = document.getElementById(this.id)
+            providers = document.getElementsByClassName("provider")
+
+
+            $(".provider").each(function(){
+                $(this).removeClass("bg-secondary")
+                $(this).removeClass("text-white")
+                $(this).addClass("bg-white")
+                $(this).addClass("text-muted")
+            })
 
             selectedProvider = $(this).text().toLowerCase().trim()
             if( $(this).hasClass("bg-white")){
@@ -37,17 +45,13 @@
             list.forEach(function(element){
                 try{
                     innerText = element.getElementsByClassName("providerName")[0].innerHTML.split("</i>")[1].toLowerCase().trim()
-                    console.log(innerText)
                 } catch (TypeError){
                     return
                 }
                 if(selectedProvider != innerText){
-                    console.log(selectedProvider)
-                    console.log(innerText)
                     element.style.display = "none"
                 }
                 else{
-                    console.log("DISPLAY")
                     element.style.display = ""
                 }
             })
@@ -77,6 +81,7 @@
                               <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit" style="background-color:#485078">Search <i class="fas fa-search" style="margin-left:20px"></i></button>
                                   <a class="btn btn-secondary" href="/news_list" style="background-color:#485078">Top headlines <i class="fas fa-medal" style="margin-left:20px"></i></a>
+                                  <a class="btn btn-secondary" href="/news_check" style="background-color:#485078">Check your news <i class="fas fa-check-circle" style="margin-left:20px"></i></a>
 
                               </div>
                             </div>
@@ -93,11 +98,13 @@
                             <i style="margin-right:10px;" class="fas fa-medal"></i>{{text}}
                 </h5>
             {% endfor %}
+            {% if show_providers == "True" %}
             {% for provider in providers %}
                 <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px; margin:5px" class="bg-white rounded-lg text-muted provider">
                             <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider}}
                 </h7>
             {% endfor %}
+            {% endif %}
         </div>
 
         <div class="grid">

@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     path('', views.add_preferences, name='add_preferences'),
     path('news_list', views.news_list, name='news_list'),
+    path('news_check', views.news_keywords, name='news_check')
 ]
 
 if settings.DEBUG:
