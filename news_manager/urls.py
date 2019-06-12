@@ -5,7 +5,8 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('', views.add_preferences, name='add_preferences')
+    path('', views.add_preferences, name='add_preferences'),
+    path('news_list', views.news_list, name='news_list'),
 ]
 
 if settings.DEBUG:

@@ -4,49 +4,92 @@
 <html>
 <head>
     <title>News Verifier</title>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="background: rgba(94,134,255,1);
-background: -moz-linear-gradient(top, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 100%);
-background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(94,134,255,1)), color-stop(100%, rgba(173,0,92,1)));
-background: -webkit-linear-gradient(top, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 100%);
-background: -o-linear-gradient(top, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 100%);
-background: -ms-linear-gradient(top, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 100%);
-background: linear-gradient(to bottom, rgba(94,134,255,1) 0%, rgba(173,0,92,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e86ff', endColorstr='#ad005c', GradientType=0 );
-">
+    <style>
+        input[type='checkbox']{
+            -webkit-appearance:none;
+            width:100%;
+            height:80px;
+            background:white;
+            position-relative;
+            left:2px
+        }
+        input[type='checkbox']:checked{
+            background: #485078;
 
-    <div class="container-fluid " style="max-width:900px; height:100%; display:table;width:100%; position:relative;top:30px;">
-        <div class="card" style="opacity:0.5">
-            <img class="card-img" src="/static/news_icon.png" style="margin:30px; max-width:200px" alt="Card image cap">
-            <div class="card-img-overlay">
-                        <div class="h2 text-center text-dark" style="margin-top:75px; margin-left:230px; margin-right=30px">Please select news providers you like</div>
+        }
+        input[type='checkbox']:checked + label{
+            content: '✔';
+            text-align:left
+            background: #485078;
+
+
+        }
+    </style>
+</head>
+<body style="background-color:#dddddd">
+
+        <nav class="navbar navbar-light sticky-top justify-content-center" style="-webkit-box-shadow: 2px -18px 22px 20px rgba(0,0,0,0.75);
+                                                -moz-box-shadow: 2px -18px 22px 20px rgba(0,0,0,0.75);
+                                                box-shadow: 2px -18px 22px 20px rgba(0,0,0,0.75);
+                                                background-color:#485078">
+          <div class="grid">
+              <div class="row justify-content-center">
+                <a class="navbar-brand text-light" href="/news_list"><h2><i style="margin-right:10px" class="fas fa-newspaper"></i>News Verifier</h2></a>
+              </div>
+              <div class="row text-white">
+                        <h6>Please select news providers you like</h6>
+              </div>
+          </div>
+        </nav>
+
+    <div class="container-fluid justify-content-center" style="height:80%; max-width:80%; display:table; position:relative;top:30px; padding-bottom:30px">
+
+        <div class="grid">
+            <div class="row justify-content-center" style="margin-top:20px">
+
+                <form class="form-inline justify-content-center" method="post">
+                    {% csrf_token %}
+                    {% for provider in providers %}
+                        <div class="card mb-3" style="margin:15px; width:15rem; border:0px solid white; -webkit-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
+                                                        -moz-box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75);
+                                                        box-shadow: 1px 0px 24px -2px rgba(0,0,0,0.75)">
+<!--                            <div class="card-header">-->
+<!--                                <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px;" class="bg-white rounded-lg text-muted">-->
+<!--                                    <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider.name}}-->
+<!--                                </h7>-->
+<!--                            </div>-->
+                            <div class="">
+                                <div class="form-inline form-check">
+                                  <label class="form-check-label" for="{{provider.name}}">
+                                      <h7 style="padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px;" class="bg-white rounded-lg text-muted">
+                                        <i style="margin-right:10px;" class="fas fa-newspaper"></i>{{provider.name}}
+                                        </h7>
+                                  </label>
+                                    <input class="form-check-input" type="checkbox" value="" name="{{provider.base_url}}" id="{{provider.name}}">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                {% endfor %}
+                <div class="row">
+                    <h3>
+                    <button class="btn btn-lg btn-primary rounded-lg text-white" style="position:absolute; right:100px; padding:10px; background-color:#485078; border:0px solid white" type="submit" value="">
+                        Browse news<i style="margin-left:10px;" class="fas fa-angle-double-right"></i></button></h3>
+                </div>
+                </form>
+            </div>
             </div>
         </div>
 
-        <div class="container" style="margin-top:40px; padding-bottom:80px">
-
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <div class="card text-center">
-                <div class="card-header">Select multiple providers</div>
-                <div class="card-body">
-                    <select multiple class="fom-control" id="providers_form" style="width:100%">
-                    {% for provider in providers %}
-                    <option value="{{provider.name}}">{{provider.name}}</option>
-                    {% endfor %}
-                    </select>
-                </div>
-                <div class="card-footer text-center">
-                    <button type="submit" id="providers" class="btn-lg btn-secondary">Next ></button>
-                </div>
-            </div>
-        </form>
     </div>
 </body>
 </html>
