@@ -1,5 +1,5 @@
 certifi==2019.3.9
-joblib==0.13.2
+joblib==1.2.0
 mkl-fft==1.0.12
 mkl-random==1.0.2
 mkl-service==2.0.2
